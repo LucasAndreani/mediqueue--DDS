@@ -2,5 +2,3 @@ node_modules/
 src/db/mediqueue.db
 *.log
 .env
-docs/
-README.md

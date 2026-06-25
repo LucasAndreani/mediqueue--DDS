@@ -141,7 +141,9 @@ describe('Módulo de Turnos - MediQueue', () => {
 
   // Caso 6: regla de negocio no trivial - cancelacion fuera de plazo (422)
   test('CP06 - Rechaza la cancelación con menos de 2 horas de anticipación', async () => {
-    const fechaHoraCercana = new Date(Date.now() + 60 * 60 * 1000).toISOString().slice(0, 19); // +1h
+    const enUnaHora = new Date(Date.now() + 60 * 60 * 1000);
+    const pad = n => String(n).padStart(2, '0');
+    const fechaHoraCercana = `${enUnaHora.getFullYear()}-${pad(enUnaHora.getMonth() + 1)}-${pad(enUnaHora.getDate())}T${pad(enUnaHora.getHours())}:${pad(enUnaHora.getMinutes())}:${pad(enUnaHora.getSeconds())}`;
 
     const creado = await request(app).post('/api/turnos').send({
       pacienteId: ids.pacienteId,
